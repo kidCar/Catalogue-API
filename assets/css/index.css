@@ -1,0 +1,42 @@
+/* .card {
+  box-shadow: 0 1px 3px black, 0 1px 3px rgb(0, 0, 0.24);
+  box-sizing: border-box;
+  margin: 10px 0;
+  background-color: beige;
+  max-width: 529px;
+  transition: all 0.2 ease-out;
+  cursor: pointer;
+  opacity: 0.7;
+} */
+
+.container{
+  max-width: 1400px;
+}
+img{
+    width: 100%;    
+}
+.card-inner{
+    padding: 10px;
+}
+/* .container {
+  display: grid;
+  grid-template-areas: "header"
+      "section"
+      "section"
+      "main"
+      "footer"
+  ;
+} */
+.pokemon-list {
+  display: grid;
+  grid-template-areas: "div div div div div div"
+      "div div div div div div";
+  height: 50vh;
+  padding: 8vh;
+  overflow-y: scroll;
+  /* border: 1px solid rgb(0, 0, 0); */
+}
+.icon-region {
+  width: 40px;
+  height: 40px;
+}
