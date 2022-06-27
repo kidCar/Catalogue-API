@@ -1,8 +1,9 @@
 const mainDiv = document.querySelector('#container-pokemons');
 const seachElement = document.querySelector('#search');
 const NOT_IMAGE_TEXT = 'la imagen del pokemon';
-const baseUrlAPI='https://rickandmortyapi.com/api/character/';
+const baseUrlAPI='https://pokeapi.co/api/v2/pokemon/';
 let globalPokemons = [];
+
 
 const cleanView = () => {
     mainDiv.innerHTML = '';
@@ -27,18 +28,40 @@ seachElement.addEventListener('keyup', (event) => {
 });
 
 const getPokemons = async () => {
+    let card = "";
+
     // fetch('https://pokeapi.co/api/v2/pokemon/', { method: 'GET' })
     //     .then(response => response.json())
     //     .then(pokemons => console.log('pokemons: ', pokemons));
-    const response = await fetch(baseUrlAPI);
-    // const response = await fetch('./assets/kanto.json');
+    //const response = await fetch(baseUrlAPI);
+    const response = await fetch('./assets/custom_pokemons.json');
+    //const response = await fetch('./assets/custom_pokemons.json');
     const responseJson =  await response.json();
     const pokemons = responseJson.results;
     for(const element of pokemons){
         const response = await fetch(element.url);        
         const imgResponseJson = await response.json();
-        normalizePokemonData(element.name, element.image)
+        normalizePokemonData(element.name, imgResponseJson)
     };
+
+    pokemons.forEach((project) => {
+      card =
+        card +
+        `<div class="col">
+            <div class="card shadow-sm">
+              <img src="${project.id}" class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">${project.id}</h5>
+                <p class="card-text">${project.name}</p>
+                <div class="row">
+                  ${project.ThumbnailImage}
+                </div>
+              </div>
+            </div>
+          </div>`;
+         
+    });
+    document.getElementById("projects").innerHTML = card;
 };
 
 const normalizePokemonData =  (name, imgResponseJson) => {
@@ -77,6 +100,7 @@ async function main() {
     renderPokemons(globalPokemons);
 }
 main();
+
 
 // 2 Forma de funcion arrow/flecha
 // const main = async () => {
